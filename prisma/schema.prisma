@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  name              String
+  email             String    @unique
+  emailVerified     DateTime?
+  image             String?
+  password          String?
+  roleId            String
+  role              Role      @relation(fields: [roleId], references: [id])
+  isDefaultPassword Boolean   @default(true)
+  accounts          Account[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Role {
+  id    String @id @default(cuid())
+  label String @unique
+  value String @unique
+  users User[]
+}
+
+model Exercise {
+  id         String       @id @default(cuid())
+  name       String
+  typeId     String
+  number     String
+  image      String
+  type       ExerciseType @relation(fields: [typeId], references: [id])
+  categoryId String
+  category   Category     @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  exercises Exercise[]
+}
+
+model ExerciseType {
+  id        String     @id @default(cuid())
+  name      String
+  exercises Exercise[]
+}
