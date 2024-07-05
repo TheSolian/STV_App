@@ -19,7 +19,7 @@ export const UserExerciseList: React.FC<Props> = async ({
   const exercises = await getExercisesByUserId(userId || session?.user.id || '')
 
   return (
-    <div className="gap-y-4">
+    <div className="space-y-4">
       {!userId ? (
         <div className="flex justify-end">
           <Link
@@ -40,11 +40,7 @@ export const UserExerciseList: React.FC<Props> = async ({
         )}
       >
         {exercises?.map((exercise) => (
-          <UserExercise
-            key={exercise.id}
-            exercise={exercise}
-            userId={userId || session?.user.id}
-          />
+          <UserExercise key={exercise.id} exercise={exercise} userId={userId} />
         ))}
       </div>
     </div>
