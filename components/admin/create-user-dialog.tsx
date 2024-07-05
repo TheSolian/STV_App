@@ -1,7 +1,7 @@
 'use client'
 
 import { createUser } from '@/actions/admin/create-user'
-import { getRoles } from '@/actions/get-roles'
+import { getRoles } from '@/actions/auth/get-roles'
 import { ROLES } from '@/config/roles'
 import { cn } from '@/lib/utils'
 import { CreateUserSchema } from '@/schemas'

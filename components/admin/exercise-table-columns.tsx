@@ -1,6 +1,6 @@
 'use client'
 
-import { getExercises } from '@/actions/admin/get-exercises'
+import { getExercises } from '@/actions/get-exercises'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDownIcon, MoreHorizontalIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -75,7 +75,17 @@ export const exerciseTableColumns: ColumnDef<Exercise>[] = [
     cell: ({ row }) => {
       const { name, image } = row.original
 
-      return <Image src={image} width={200} height={100} alt={name} priority />
+      return (
+        <Image
+          src={image}
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="h-auto w-[200px] object-contain"
+          alt={name}
+          priority
+        />
+      )
     },
   },
   {

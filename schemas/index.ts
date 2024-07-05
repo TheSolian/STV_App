@@ -22,3 +22,12 @@ export const ChangePasswordSchema = z
     message: 'Passwörter stimmen nicht überein',
     path: ['confirmNewPassword'],
   })
+
+export const CreateExerciseSchema = z.object({
+  name: z.string().min(1, { message: 'Name ist erforderlich' }),
+  number: z.string().min(1, { message: 'Nummer ist erforderlich' }),
+  difficulty: z.string().min(1, { message: 'Kategorie ist erforderlich' }),
+  categoryId: z.string(),
+  typeId: z.string(),
+  image: z.string(),
+})

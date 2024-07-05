@@ -1,18 +1,9 @@
-import { auth } from '@/auth'
-import LogoutButton from '@/components/auth/logout-button'
+import { redirect } from 'next/navigation'
 
 type Props = {}
 
 const Page: React.FC<Props> = async ({}) => {
-  const session = await auth()
-
-  return (
-    <div>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
-
-      <LogoutButton>Logout</LogoutButton>
-    </div>
-  )
+  return redirect('/my-exercises')
 }
 
 export default Page

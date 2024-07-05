@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id                String    @id @default(cuid())
+  id                String         @id @default(cuid())
   name              String
-  email             String    @unique
+  email             String         @unique
   emailVerified     DateTime?
   image             String?
   password          String?
   roleId            String
-  role              Role      @relation(fields: [roleId], references: [id])
-  isDefaultPassword Boolean   @default(true)
+  role              Role           @relation(fields: [roleId], references: [id])
+  isDefaultPassword Boolean        @default(true)
   accounts          Account[]
+  exercises         ExerciseUser[]
 }
 
 model Account {
@@ -48,15 +49,25 @@ model Role {
   users User[]
 }
 
+model ExerciseUser {
+  id         String   @id @default(cuid())
+  userId     String
+  exerciseId String
+  users      User     @relation(fields: [userId], references: [id])
+  exercises  Exercise @relation(fields: [exerciseId], references: [id])
+}
+
 model Exercise {
-  id         String       @id @default(cuid())
+  id         String         @id @default(cuid())
   name       String
   typeId     String
   number     String
   image      String
-  type       ExerciseType @relation(fields: [typeId], references: [id])
+  difficulty String
+  type       ExerciseType   @relation(fields: [typeId], references: [id])
   categoryId String
-  category   Category     @relation(fields: [categoryId], references: [id])
+  category   Category       @relation(fields: [categoryId], references: [id])
+  users      ExerciseUser[]
 }
 
 model Category {

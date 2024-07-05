@@ -1,4 +1,4 @@
-import { getExercises } from '@/actions/admin/get-exercises'
+import { getExercises } from '@/actions/get-exercises'
 import { ExerciseTable } from '@/components/admin/exercise-table'
 import { exerciseTableColumns } from '@/components/admin/exercise-table-columns'
 

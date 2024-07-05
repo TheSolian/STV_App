@@ -21,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table'
+import { CreateExerciseDialog } from './create-exercise-dialog'
 
 type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[]
@@ -52,8 +53,8 @@ export function ExerciseTable<TData, TValue>({
     <div className="w-full">
       <div className="flex flex-col items-center justify-between gap-4 py-4 md:flex-row">
         <div className="flex w-full items-center justify-between gap-2 md:hidden">
-          {/* <ImportUserDialog />
-          <CreateUserDialog triggerLabel="Hinzufügen" /> */}
+          {/* <ImportUserDialog /> */}
+          <CreateExerciseDialog triggerLabel="Element hinzufügen" />
         </div>
         <Input
           placeholder="Suche Elemente..."
@@ -66,7 +67,7 @@ export function ExerciseTable<TData, TValue>({
         <div className="flex items-center gap-2 max-md:hidden">
           {/* <ImportUserDialog />
           <CreateUserDialog triggerLabel="Benutzer hinzufügen" /> */}
-          <Button>Element hinzufügen</Button>
+          <CreateExerciseDialog triggerLabel="Element hinzufügen" />
         </div>
       </div>
       <div className="rounded-md border">

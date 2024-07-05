@@ -3,6 +3,7 @@ import { MenuIcon } from 'lucide-react'
 import Link from 'next/link'
 import LogoutButton from './auth/logout-button'
 import { Button, buttonVariants } from './ui/button'
+import { Separator } from './ui/separator'
 import {
   Sheet,
   SheetClose,
@@ -61,7 +62,8 @@ export const Navbar: React.FC<Props> = async ({}) => {
             <SheetHeader>
               <SheetTitle>STV Jonen</SheetTitle>
             </SheetHeader>
-            <div className="flex h-full flex-col gap-16 pt-8">
+            <Separator className="my-4" />
+            <div className="flex h-full flex-col">
               <div>
                 <Link
                   href="/my-exercises"
@@ -70,8 +72,9 @@ export const Navbar: React.FC<Props> = async ({}) => {
                   Meine Übungen
                 </Link>
               </div>
-              <div className="flex flex-col items-start gap-2">
-                {isAdmin ? (
+              <div className="flex flex-col items-start">
+                {isAdmin || isTrainer ? <Separator className="my-4" /> : null}
+                {isAdmin || isTrainer ? (
                   <Link
                     href="/dashboard"
                     className={buttonVariants({ variant: 'link' })}
@@ -87,6 +90,9 @@ export const Navbar: React.FC<Props> = async ({}) => {
                     Admin
                   </Link>
                 ) : null}
+              </div>
+              <div>
+                <Separator className="my-4" />
                 <LogoutButton>
                   <Button>Logout</Button>
                 </LogoutButton>
