@@ -15,7 +15,7 @@ const Page: React.FC<Props> = async ({ params }) => {
   const user = await getUserById(params.id)
 
   return (
-    <div className="grid grid-cols-[275px,1fr]">
+    <div className="grid grid-rows-[50px,1fr] lg:grid-cols-[275px,1fr]">
       <div className="h-[calc(100vh-var(--navbar-height))] border-r p-4">
         <div className="flex h-5 items-center gap-4 text-center">
           <Link
