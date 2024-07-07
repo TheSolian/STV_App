@@ -1,7 +1,7 @@
 type Props = {}
 
 const Page: React.FC<Props> = ({}) => {
-  return <div>Exercises</div>
+  return <div>Übungen</div>
 }
 
 export default Page

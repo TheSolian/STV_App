@@ -8,6 +8,8 @@ import {
   Trash2Icon,
 } from 'lucide-react'
 import { useState } from 'react'
+import { TBD } from '../to-be-done'
+import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -42,7 +44,8 @@ export const UserTableActions: React.FC<Props> = ({ user }) => {
         <DropdownMenuLabel>Aktionen</DropdownMenuLabel>
         <DropdownMenuItem onSelect={() => setIsEditUserDialogOpen(true)}>
           <PenIcon className="mr-2 size-4" />
-          Benutzer bearbeiten
+          <span>Benutzer bearbeiten</span>
+          <TBD />
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => setIsResetPasswordDialogOpen(true)}>
           <KeyRoundIcon className="mr-2 size-4" />

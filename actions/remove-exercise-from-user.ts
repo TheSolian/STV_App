@@ -11,7 +11,7 @@ export const removeExerciseFromUserList = async ({
   exerciseId,
   userId,
 }: RemoveExerciseFromUserArgs) => {
-  const exerciseUser = await db.exerciseUser.findFirst({
+  const existingExerciseUser = await db.exerciseUser.findFirst({
     where: {
       AND: {
         exerciseId,
@@ -20,10 +20,10 @@ export const removeExerciseFromUserList = async ({
     },
   })
 
-  if (exerciseUser) {
+  if (existingExerciseUser) {
     await db.exerciseUser.delete({
       where: {
-        id: exerciseUser.id,
+        id: existingExerciseUser.id,
       },
     })
   }

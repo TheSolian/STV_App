@@ -10,7 +10,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { UploadIcon } from 'lucide-react'
 import { useState } from 'react'
+import { TBD } from '../to-be-done'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import {
@@ -54,6 +56,10 @@ export function ExerciseTable<TData, TValue>({
       <div className="flex flex-col items-center justify-between gap-4 py-4 md:flex-row">
         <div className="flex w-full items-center justify-between gap-2 md:hidden">
           {/* <ImportUserDialog /> */}
+          <Button variant="link">
+            <UploadIcon className="mr-2 size-4" />
+            Übungen Importieren <TBD />
+          </Button>
           <CreateExerciseDialog triggerLabel="Element hinzufügen" />
         </div>
         <Input
@@ -67,6 +73,10 @@ export function ExerciseTable<TData, TValue>({
         <div className="flex items-center gap-2 max-md:hidden">
           {/* <ImportUserDialog />
           <CreateUserDialog triggerLabel="Benutzer hinzufügen" /> */}
+          <Button variant="link">
+            <UploadIcon className="mr-2 size-4" />
+            Übungen Importieren <TBD />
+          </Button>
           <CreateExerciseDialog triggerLabel="Element hinzufügen" />
         </div>
       </div>

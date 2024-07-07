@@ -32,7 +32,12 @@ export const getExercisesByUserId = async (id: string) => {
 
   if (!user) return
 
-  const exercises = user.exercises.map((exercise) => exercise.exercises)
+  const exercises = user.exercises.map((exercise) => {
+    return {
+      able: exercise.able,
+      ...exercise.exercises,
+    }
+  })
 
   return exercises
 }

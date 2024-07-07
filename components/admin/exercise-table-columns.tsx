@@ -4,6 +4,7 @@ import { getExercises } from '@/actions/get-exercises'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDownIcon, MoreHorizontalIcon } from 'lucide-react'
 import Image from 'next/image'
+import { TBD } from '../to-be-done'
 import { Button } from '../ui/button'
 
 type Exercise = Awaited<ReturnType<typeof getExercises>>[number]
@@ -90,6 +91,7 @@ export const exerciseTableColumns: ColumnDef<Exercise>[] = [
   },
   {
     id: 'actions',
+    header: () => <TBD />,
     cell: ({ row }) => {
       return (
         <Button variant="ghost">

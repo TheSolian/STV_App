@@ -1,19 +1,25 @@
 'use client'
 
-import { getExercises } from '@/actions/get-exercises'
+import { getExercises, getExercisesByUserId } from '@/actions/get-exercises'
 import {
   RemoveExerciseFromUserArgs,
   removeExerciseFromUserList,
 } from '@/actions/remove-exercise-from-user'
+import { updateUserExercise } from '@/actions/update-user-exercise'
 import { useMutation } from '@tanstack/react-query'
 import { Trash2Icon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { Button } from './ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Checkbox } from './ui/checkbox'
+import { Label } from './ui/label'
 
-type Exercise = Awaited<ReturnType<typeof getExercises>>[number]
+type Exercise = NonNullable<
+  Awaited<ReturnType<typeof getExercisesByUserId>>
+>[number]
 
 type Props = {
   exercise: Exercise
@@ -23,6 +29,8 @@ type Props = {
 export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
   const router = useRouter()
   const session = useSession()
+
+  const [isChecked, setIsChecked] = useState(exercise.able)
 
   const { mutate: remove, isPending: isRemoving } = useMutation({
     mutationKey: ['remove-exercise-from-user'],
@@ -34,12 +42,23 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
     },
   })
 
+  const handleCheckboxClick = async () => {
+    setIsChecked((prev) => !prev)
+    await updateUserExercise({
+      userId: session?.data?.user.id || '',
+      exerciseId: exercise.id,
+      able: !isChecked,
+    })
+
+    router.refresh()
+  }
+
   return (
-    <Card className="grid max-w-md grid-cols-1">
+    <Card className="grid max-w-md grid-rows-[auto,1fr,10%]">
       <CardHeader className="flex justify-between">
         <CardTitle>{exercise.name}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="">
         <div className="flex flex-col justify-between gap-4">
           <div className="flex justify-evenly gap-4">
             <div>
@@ -72,7 +91,11 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
         </div>
       </CardContent>
       {!userId ? (
-        <CardFooter className="flex justify-end">
+        <CardFooter className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Checkbox checked={isChecked} onClick={handleCheckboxClick} />
+            <Label>Ich kann die Übung</Label>
+          </div>
           <Button
             size="icon"
             disabled={isRemoving}
@@ -86,7 +109,14 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
             <Trash2Icon className="size-4" />
           </Button>
         </CardFooter>
-      ) : null}
+      ) : (
+        <CardFooter>
+          <div className="flex items-center gap-2">
+            <Checkbox checked={exercise.able} className="cursor-default" />
+            <div>Kann die Übung</div>
+          </div>
+        </CardFooter>
+      )}
     </Card>
   )
 }
