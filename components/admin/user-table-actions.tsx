@@ -42,16 +42,25 @@ export const UserTableActions: React.FC<Props> = ({ user }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Aktionen</DropdownMenuLabel>
-        <DropdownMenuItem onSelect={() => setIsEditUserDialogOpen(true)}>
+        <DropdownMenuItem
+          onSelect={() => setIsEditUserDialogOpen(true)}
+          className="cursor-pointer"
+        >
           <PenIcon className="mr-2 size-4" />
           <span>Benutzer bearbeiten</span>
           <TBD />
         </DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => setIsResetPasswordDialogOpen(true)}>
+        <DropdownMenuItem
+          onSelect={() => setIsResetPasswordDialogOpen(true)}
+          className="cursor-pointer"
+        >
           <KeyRoundIcon className="mr-2 size-4" />
           Passwort zurücksetzen
         </DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => setIsDeleteUserDialogOpen(true)}>
+        <DropdownMenuItem
+          onSelect={() => setIsDeleteUserDialogOpen(true)}
+          className="cursor-pointer"
+        >
           <Trash2Icon className="mr-2 size-4" />
           Benutzer löschen
         </DropdownMenuItem>

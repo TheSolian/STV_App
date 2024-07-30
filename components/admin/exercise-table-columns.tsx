@@ -6,6 +6,7 @@ import { ArrowUpDownIcon, MoreHorizontalIcon } from 'lucide-react'
 import Image from 'next/image'
 import { TBD } from '../to-be-done'
 import { Button } from '../ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 
 type Exercise = Awaited<ReturnType<typeof getExercises>>[number]
 
@@ -77,15 +78,30 @@ export const exerciseTableColumns: ColumnDef<Exercise>[] = [
       const { name, image } = row.original
 
       return (
-        <Image
-          src={image}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="h-auto w-[200px] object-contain"
-          alt={name}
-          priority
-        />
+        <Dialog>
+          <DialogTrigger className="cursor-zoom-in">
+            <Image
+              src={image}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="h-auto w-[100px] md:w-[200px] md:object-contain"
+              alt={name}
+              priority
+            />
+          </DialogTrigger>
+          <DialogContent>
+            <Image
+              src={image}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="h-auto w-auto object-contain"
+              alt={name}
+              priority
+            />
+          </DialogContent>
+        </Dialog>
       )
     },
   },

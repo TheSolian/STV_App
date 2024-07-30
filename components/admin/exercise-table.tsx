@@ -54,13 +54,8 @@ export function ExerciseTable<TData, TValue>({
   return (
     <div className="w-full">
       <div className="flex flex-col items-center justify-between gap-4 py-4 md:flex-row">
-        <div className="flex w-full items-center justify-between gap-2 md:hidden">
-          {/* <ImportUserDialog /> */}
-          <Button variant="link">
-            <UploadIcon className="mr-2 size-4" />
-            Übungen Importieren <TBD />
-          </Button>
-          <CreateExerciseDialog triggerLabel="Element hinzufügen" />
+        <div className="flex w-full items-center justify-end gap-2 md:hidden">
+          <CreateExerciseDialog triggerLabel="Hinzufügen" />
         </div>
         <Input
           placeholder="Suche Elemente..."
@@ -71,13 +66,7 @@ export function ExerciseTable<TData, TValue>({
           className="w-full"
         />
         <div className="flex items-center gap-2 max-md:hidden">
-          {/* <ImportUserDialog />
-          <CreateUserDialog triggerLabel="Benutzer hinzufügen" /> */}
-          <Button variant="link">
-            <UploadIcon className="mr-2 size-4" />
-            Übungen Importieren <TBD />
-          </Button>
-          <CreateExerciseDialog triggerLabel="Element hinzufügen" />
+          <CreateExerciseDialog triggerLabel="Hinzufügen" />
         </div>
       </div>
       <div className="rounded-md border">

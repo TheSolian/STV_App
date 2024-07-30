@@ -1,10 +1,7 @@
 'use client'
 
-import { getExercises, getExercisesByUserId } from '@/actions/get-exercises'
-import {
-  RemoveExerciseFromUserArgs,
-  removeExerciseFromUserList,
-} from '@/actions/remove-exercise-from-user'
+import { getExercisesByUserId } from '@/actions/get-exercises'
+import { removeExerciseFromUserList } from '@/actions/remove-exercise-from-user'
 import { updateUserExercise } from '@/actions/update-user-exercise'
 import { useMutation } from '@tanstack/react-query'
 import { Trash2Icon } from 'lucide-react'
@@ -34,24 +31,19 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
 
   const { mutate: remove, isPending: isRemoving } = useMutation({
     mutationKey: ['remove-exercise-from-user'],
-    mutationFn: async (args: RemoveExerciseFromUserArgs) => {
-      await removeExerciseFromUserList(args)
-    },
+    mutationFn: removeExerciseFromUserList,
     onSuccess: () => {
       router.refresh()
     },
   })
 
-  const handleCheckboxClick = async () => {
-    setIsChecked((prev) => !prev)
-    await updateUserExercise({
-      userId: session?.data?.user.id || '',
-      exerciseId: exercise.id,
-      able: !isChecked,
-    })
-
-    router.refresh()
-  }
+  const { mutate: update, isPending: isUpdating } = useMutation({
+    mutationKey: ['update-exercise-able'],
+    mutationFn: updateUserExercise,
+    onSuccess: () => {
+      router.refresh()
+    },
+  })
 
   return (
     <Card className="grid max-w-md grid-rows-[auto,1fr,10%]">
@@ -93,12 +85,24 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
       {!userId ? (
         <CardFooter className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Checkbox checked={isChecked} onClick={handleCheckboxClick} />
-            <Label>Ich kann die Übung</Label>
+            <Checkbox
+              id="able"
+              disabled={isRemoving || isUpdating}
+              checked={isChecked}
+              onCheckedChange={async (value) => {
+                update({
+                  userId: session.data?.user.id || '',
+                  exerciseId: exercise.id,
+                  able: value as boolean,
+                })
+                setIsChecked(value as boolean)
+              }}
+            />
+            <Label htmlFor="able">Ich kann die Übung</Label>
           </div>
           <Button
             size="icon"
-            disabled={isRemoving}
+            disabled={isRemoving || isUpdating}
             onClick={() =>
               remove({
                 exerciseId: exercise.id,

@@ -61,6 +61,18 @@ export const CreateExerciseDialog: React.FC<Props> = ({ triggerLabel }) => {
   const [types, setTypes] = useState<ExerciseType[]>([])
   const [type, setType] = useState<ExerciseType>()
 
+  const form = useForm<z.infer<typeof CreateExerciseSchema>>({
+    resolver: zodResolver(CreateExerciseSchema),
+    defaultValues: {
+      name: '',
+      number: '',
+      difficulty: '',
+      categoryId: '',
+      typeId: '',
+      image: '',
+    },
+  })
+
   useEffect(() => {
     const run = async () => {
       const cs = await getCategories()
@@ -73,19 +85,7 @@ export const CreateExerciseDialog: React.FC<Props> = ({ triggerLabel }) => {
       form.setValue('typeId', ts[0].id)
     }
     run()
-  }, [])
-
-  const form = useForm<z.infer<typeof CreateExerciseSchema>>({
-    resolver: zodResolver(CreateExerciseSchema),
-    defaultValues: {
-      name: '',
-      number: '',
-      difficulty: '',
-      categoryId: '',
-      typeId: '',
-      image: '',
-    },
-  })
+  }, [form])
 
   const onSubmit = async (values: z.infer<typeof CreateExerciseSchema>) => {
     if (image === null) return

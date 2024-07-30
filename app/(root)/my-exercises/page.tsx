@@ -1,11 +1,16 @@
+import { getExercisesByUserId } from '@/actions/get-exercises'
+import { auth } from '@/auth'
 import { UserExerciseList } from '@/components/user-exercise-list'
 
 type Props = {}
 
-const Page: React.FC<Props> = ({}) => {
+const Page: React.FC<Props> = async ({}) => {
+  const session = await auth()
+  const exercises = await getExercisesByUserId(session?.user.id || '')
+
   return (
-    <div className="p-4">
-      <UserExerciseList />
+    <div>
+      <UserExerciseList data={exercises} />
     </div>
   )
 }

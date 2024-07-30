@@ -1,12 +1,14 @@
-import { auth } from '@/auth'
+'use client'
+
 import { MenuIcon } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useState } from 'react'
 import LogoutButton from './auth/logout-button'
 import { Button, buttonVariants } from './ui/button'
 import { Separator } from './ui/separator'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -15,15 +17,20 @@ import {
 
 type Props = {}
 
-export const Navbar: React.FC<Props> = async ({}) => {
-  const session = await auth()
+export const Navbar: React.FC<Props> = ({}) => {
+  const session = useSession()
 
-  const isAdmin = session && session.user.role.value === 'admin'
-  const isTrainer = session && session.user.role.value === 'trainer'
+  const isAdmin = session && session.data?.user.role.value === 'admin'
+  const isTrainer = session && session.data?.user.role.value === 'trainer'
+
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
     <nav className="flex h-[var(--navbar-height)] items-center gap-4 border-b bg-white px-4">
-      <h1 className="shrink-0 text-2xl">STV Jonen</h1>
+      <div className="flex shrink-0 items-center gap-2">
+        <img src="/logo.webp" width="40" />
+        <h1 className="text-2xl">STV Jonen</h1>
+      </div>
 
       <div className="hidden w-full items-center justify-between md:flex">
         <div>
@@ -34,27 +41,32 @@ export const Navbar: React.FC<Props> = async ({}) => {
             Meine Übungen
           </Link>
         </div>
-        <div className="flex items-center">
-          {isAdmin || isTrainer ? (
-            <Link
-              href="/dashboard"
-              className={buttonVariants({ variant: 'link' })}
-            >
-              Dashboard
-            </Link>
-          ) : null}
-          {isAdmin ? (
-            <Link href="/admin" className={buttonVariants({ variant: 'link' })}>
-              Admin
-            </Link>
-          ) : null}
+        <div className="flex items-center gap-8">
+          <div>
+            {isAdmin || isTrainer ? (
+              <Link
+                href="/dashboard"
+                className={buttonVariants({ variant: 'link' })}
+              >
+                Dashboard
+              </Link>
+            ) : null}
+            {isAdmin ? (
+              <Link
+                href="/admin"
+                className={buttonVariants({ variant: 'link' })}
+              >
+                Admin
+              </Link>
+            ) : null}
+          </div>
           <LogoutButton>
             <Button>Logout</Button>
           </LogoutButton>
         </div>
       </div>
       <div className="flex w-full justify-end md:hidden">
-        <Sheet>
+        <Sheet open={isMobileNavOpen} onOpenChange={setIsMobileNavOpen}>
           <SheetTrigger asChild>
             <MenuIcon />
           </SheetTrigger>
@@ -66,6 +78,7 @@ export const Navbar: React.FC<Props> = async ({}) => {
             <div className="flex h-full flex-col">
               <div>
                 <Link
+                  onClick={() => setIsMobileNavOpen(false)}
                   href="/my-exercises"
                   className={buttonVariants({ variant: 'link' })}
                 >
@@ -76,6 +89,7 @@ export const Navbar: React.FC<Props> = async ({}) => {
                 {isAdmin || isTrainer ? <Separator className="my-4" /> : null}
                 {isAdmin || isTrainer ? (
                   <Link
+                    onClick={() => setIsMobileNavOpen(false)}
                     href="/dashboard"
                     className={buttonVariants({ variant: 'link' })}
                   >
@@ -84,6 +98,7 @@ export const Navbar: React.FC<Props> = async ({}) => {
                 ) : null}
                 {isAdmin ? (
                   <Link
+                    onClick={() => setIsMobileNavOpen(false)}
                     href="/admin"
                     className={buttonVariants({ variant: 'link' })}
                   >

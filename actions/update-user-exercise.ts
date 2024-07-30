@@ -20,9 +20,9 @@ export const updateUserExercise = async ({
     },
   })
 
-  if (!exerciseUser) return null
+  if (!exerciseUser) return { success: false, data: null }
 
-  await db.exerciseUser.update({
+  const exercise = await db.exerciseUser.update({
     where: {
       id: exerciseUser?.id,
     },
@@ -30,4 +30,6 @@ export const updateUserExercise = async ({
       able,
     },
   })
+
+  return { success: true, data: exercise }
 }

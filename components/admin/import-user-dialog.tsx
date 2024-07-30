@@ -59,10 +59,10 @@ export const ImportUserDialog: React.FC<Props> = ({}) => {
         </DialogHeader>
         <div
           className={cn(
-            'relative size-full flex-1 rounded-md bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center',
+            'relative flex size-full flex-1 flex-col items-center justify-center rounded-md bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl',
             {
-              'ring-blue-900/25 bg-blue-900/10': isDragOver,
-            }
+              'bg-blue-900/10 ring-blue-900/25': isDragOver,
+            },
           )}
         >
           <Dropzone
@@ -78,15 +78,15 @@ export const ImportUserDialog: React.FC<Props> = ({}) => {
             {({ getRootProps, getInputProps }) => (
               <div
                 {...getRootProps()}
-                className="size-full flex-1 flex flex-col items-center justify-center"
+                className="flex size-full flex-1 flex-col items-center justify-center"
               >
                 <input {...getInputProps()} />
                 {isDragOver ? (
-                  <MousePointerSquareDashedIcon className="size-6 text-zinc-500 mb-2" />
+                  <MousePointerSquareDashedIcon className="mb-2 size-6 text-zinc-500" />
                 ) : (
-                  <FileIcon className="size-6 text-zinc-500 mb-2" />
+                  <FileIcon className="mb-2 size-6 text-zinc-500" />
                 )}
-                <div className="flex flex-col justify-center mb-2 text-sm text-zinc-700">
+                <div className="mb-2 flex flex-col justify-center text-sm text-zinc-700">
                   {isDragOver ? (
                     <p>
                       <span className="font-semibold">Datei ablegen</span> um

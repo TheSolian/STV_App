@@ -11,4 +11,4 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-export const storage = getStorage(app, 'gs://stv-app-8daf1.appspot.com')
+export const storage = getStorage(app, 'gs://stv-app-8daf1')

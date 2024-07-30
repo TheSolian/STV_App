@@ -65,15 +65,3 @@ export const userTableColumns: ColumnDef<User>[] = [
     },
   },
 ]
-
-// header: ({ column }) => {
-//   return (
-//     <Button
-//       variant="ghost"
-//       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-//     >
-//       Name
-//       <ArrowUpDownIcon className="ml-2 size-4" />
-//     </Button>
-//   )
-// },
