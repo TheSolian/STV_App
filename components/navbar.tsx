@@ -2,6 +2,7 @@
 
 import { MenuIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import LogoutButton from './auth/logout-button'
@@ -28,7 +29,7 @@ export const Navbar: React.FC<Props> = ({}) => {
   return (
     <nav className="flex h-[var(--navbar-height)] items-center gap-4 border-b bg-white px-4">
       <div className="flex shrink-0 items-center gap-2">
-        <img src="/logo.webp" width="40" />
+        <Image src="/logo.webp" width="40" height="40" alt="Logo" />
         <h1 className="text-2xl">STV Jonen</h1>
       </div>
 

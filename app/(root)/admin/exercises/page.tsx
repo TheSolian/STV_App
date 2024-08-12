@@ -8,7 +8,7 @@ const Page: React.FC<Props> = async ({}) => {
   const exercises = await getExercises()
 
   return (
-    <div className="h-full p-4">
+    <div className="h-full px-4">
       <div>
         <ExerciseTable columns={exerciseTableColumns} data={exercises} />
       </div>

@@ -98,7 +98,7 @@ export const ExerciseList: React.FC<Props> = ({ exercises, userExercises }) => {
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {exercises
             .filter((exercise) => {
               const matchesSearchTerm = exercise.name

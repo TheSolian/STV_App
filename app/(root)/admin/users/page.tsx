@@ -8,7 +8,7 @@ const Page: React.FC<Props> = async ({}) => {
   const users = await getUsers()
 
   return (
-    <div className="h-full p-4">
+    <div className="h-full px-4">
       <div>
         <UserTable columns={userTableColumns} data={users} />
       </div>

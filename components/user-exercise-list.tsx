@@ -43,20 +43,19 @@ export const UserExerciseList: React.FC<Props> = ({
   return (
     <div className="grid grid-cols-1 grid-rows-[50px,1fr] lg:grid-cols-[275px,1fr] lg:grid-rows-1">
       <div className="h-[calc(100vh-var(--navbar-height))] border-r p-4">
-        <div className="flex h-5 items-center gap-4 text-center">
+        <div className="flex flex-col">
           {userId ? (
             <>
               <Link
                 href="/dashboard/users"
                 className={buttonVariants({
                   className: 'flex items-center gap-2',
-                  variant: 'link',
                 })}
               >
                 <ArrowLeftIcon className="size-4" />
                 <span>Zurück</span>
               </Link>
-              <Separator orientation="vertical" />
+              <Separator className="my-4" />
             </>
           ) : null}
           <h1 className="font-bold">{userId ? name : 'Meine Übungen'}</h1>
@@ -145,7 +144,7 @@ export const UserExerciseList: React.FC<Props> = ({
         {data && data.length > 0 ? (
           <div
             className={cn(
-              'grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3',
+              'grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
               className,
             )}
           >

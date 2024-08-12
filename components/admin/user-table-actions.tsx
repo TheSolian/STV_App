@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from '@prisma/client'
+import { getUsers } from '@/actions/admin/get-users'
 import {
   KeyRoundIcon,
   MoreHorizontalIcon,
@@ -9,7 +9,6 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { TBD } from '../to-be-done'
-import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -21,6 +20,8 @@ import {
 import { DeleteUserDialog } from './delete-user-dialog'
 import { EditUserDialog } from './edit-user-dialog'
 import { ResetPasswordDialog } from './reset-password-dialog'
+
+type User = Awaited<ReturnType<typeof getUsers>>[number]
 
 type Props = {
   user: User
@@ -65,12 +66,12 @@ export const UserTableActions: React.FC<Props> = ({ user }) => {
           Benutzer löschen
         </DropdownMenuItem>
       </DropdownMenuContent>
-      {/* @ts-ignore */}
-      {/* <EditUserDialog
+
+      <EditUserDialog
         user={user}
         open={isEditUserDialogOpen}
         setIsOpen={setIsEditUserDialogOpen}
-      /> */}
+      />
       <ResetPasswordDialog
         open={isResetPasswordDialogOpen}
         setIsOpen={setIsResetPasswordDialogOpen}

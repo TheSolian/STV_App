@@ -21,3 +21,28 @@ export const getUsers = async () => {
 
   return users
 }
+
+export const getUsersByExerciseId = async (id: string) => {
+  const exercise = await db.exercise.findUnique({
+    where: { id },
+    include: {
+      users: {
+        include: {
+          users: true,
+        },
+      },
+    },
+  })
+
+  if (!exercise) return
+
+  const users = exercise.users.map((user) => {
+    return {
+      able: user.able,
+      name: user.users.name,
+      id: user.users.id,
+    }
+  })
+
+  return users
+}

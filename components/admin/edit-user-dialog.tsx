@@ -3,14 +3,21 @@
 import { createUser } from '@/actions/admin/create-user'
 import { getUsers } from '@/actions/admin/get-users'
 import { updateUser } from '@/actions/admin/update-user'
-import { ROLES, Role } from '@/config/roles'
+import { getRoles } from '@/actions/auth/get-roles'
 import { cn } from '@/lib/utils'
 import { CreateUserSchema } from '@/schemas'
 import { User } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Role } from '@prisma/client'
 import { CheckIcon, PenIcon, PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Dispatch, SetStateAction, useState, useTransition } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useTransition,
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -49,18 +56,27 @@ type Props = {
 export const EditUserDialog: React.FC<Props> = ({ user, open, setIsOpen }) => {
   const router = useRouter()
 
-  const [role, setRole] = useState<Role>(
-    ROLES.find((role) => role.value === user.role.value) as Role
-  )
   const [error, setError] = useState<string | undefined>('')
   const [isPending, startTransition] = useTransition()
+  const [roles, setRoles] = useState<Role[]>([])
+  const [selectedRole, setSelectedRole] = useState<Role | null>(null)
+
+  useEffect(() => {
+    getRoles().then((data) => {
+      setRoles(data)
+      const role = data.find((r) => r.value === user.role.value)
+      if (role) {
+        setSelectedRole(role)
+      }
+    })
+  }, [])
 
   const form = useForm<z.infer<typeof CreateUserSchema>>({
     resolver: zodResolver(CreateUserSchema),
     defaultValues: {
       name: user.name,
       email: user.email,
-      role: role.value,
+      role: selectedRole?.value,
     },
   })
 
@@ -69,9 +85,6 @@ export const EditUserDialog: React.FC<Props> = ({ user, open, setIsOpen }) => {
 
     startTransition(() => {
       updateUser(values).then((data) => {
-        // if (data?.error) {
-        //   setError(data.error)
-        // }
         if (data?.success) {
           form.reset()
           setIsOpen(false)
@@ -145,30 +158,31 @@ export const EditUserDialog: React.FC<Props> = ({ user, open, setIsOpen }) => {
                               disabled={isPending}
                               className="w-full"
                             >
-                              {role.label}
+                              {selectedRole?.label}
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            {ROLES.map((r) => (
+                            {roles.map((r) => (
                               <DropdownMenuItem
                                 key={r.value}
                                 onClick={() => {
-                                  setRole(r)
+                                  setSelectedRole(r)
                                   form.setValue('role', r.value)
                                 }}
                                 className={cn(
-                                  'flex text-sm gap-1 items-center p-1.5 cursor-default hover:bg-zinc-100',
+                                  'flex cursor-default items-center gap-1 p-1.5 text-sm hover:bg-zinc-100',
                                   {
-                                    'bg-zinc-100': role.value === r.value,
-                                  }
+                                    'bg-zinc-100':
+                                      selectedRole?.value === r.value,
+                                  },
                                 )}
                               >
                                 <CheckIcon
                                   className={cn(
                                     'mr-2 size-4',
-                                    role.value === r.value
+                                    selectedRole?.value === r.value
                                       ? 'opacity-100'
-                                      : 'opacity-0'
+                                      : 'opacity-0',
                                   )}
                                 />
                                 {r.label}
@@ -184,7 +198,7 @@ export const EditUserDialog: React.FC<Props> = ({ user, open, setIsOpen }) => {
               }}
             />
             <FormError message={error} />
-            <div className="self-end flex gap-2">
+            <div className="flex gap-2 self-end">
               <DialogClose asChild>
                 <Button
                   type="button"
