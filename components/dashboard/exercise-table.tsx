@@ -49,7 +49,7 @@ export function ExerciseTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      {/* <div className="flex flex-col items-center justify-between gap-4 py-4 md:flex-row">
+      <div className="flex flex-col items-center justify-between gap-4 py-4 md:flex-row">
         <Input
           placeholder="Suche Benutzer..."
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
@@ -58,7 +58,7 @@ export function ExerciseTable<TData, TValue>({
           }
           className="w-full"
         />
-      </div> */}
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

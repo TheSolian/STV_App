@@ -5,14 +5,12 @@ import bcrypt from 'bcryptjs'
 
 export const importUsers = async (text: String) => {
   for (const user of text.split('\n')) {
-    const [name, email] = user.split(',')
+    const [name, email] = user.split('\r')[0].split(',')
 
     if (!name || !email) continue
 
-    const trimmedEmail = email.trim()
-
     const existingUser = await db.user.findUnique({
-      where: { email: trimmedEmail },
+      where: { email },
     })
 
     if (existingUser) continue

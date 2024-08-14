@@ -1,5 +1,6 @@
 'use client'
 
+import { getUsers } from '@/actions/admin/get-users'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -11,7 +12,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { UploadIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import {
@@ -29,6 +30,8 @@ type Props<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
+
+type User = Awaited<ReturnType<typeof getUsers>>[number]
 
 export function UserTable<TData, TValue>({
   columns,
@@ -50,6 +53,8 @@ export function UserTable<TData, TValue>({
       columnFilters,
     },
   })
+
+  useEffect(() => {}, [])
 
   return (
     <div className="w-full">

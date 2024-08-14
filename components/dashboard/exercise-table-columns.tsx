@@ -40,8 +40,7 @@ export const exerciseTableColumns: ColumnDef<Exercise>[] = [
     },
     cell: ({ row }) => {
       const { users } = row.original
-      const filtered = users.filter((user) => user.able === true)
-      return <div>{filtered.length}</div>
+      return <div>{users.length}</div>
     },
   },
   {

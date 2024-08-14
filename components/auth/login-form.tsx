@@ -48,7 +48,7 @@ export const LoginForm: React.FC<Props> = ({}) => {
   }
 
   return (
-    <Card className="p-6 space-y-6 min-w-full sm:min-w-80">
+    <Card className="min-w-full space-y-6 p-6 sm:min-w-80">
       <h1 className="text-3xl font-semibold">Login</h1>
       <Form {...form}>
         <form

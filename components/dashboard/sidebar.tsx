@@ -34,7 +34,7 @@ export const Sidebar: React.FC<Props> = ({}) => {
           })}
         >
           <DumbbellIcon className="size-4" />
-          Übungen
+          Elemente
         </Link>
       </div>
     </div>

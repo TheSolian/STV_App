@@ -58,7 +58,7 @@ export const UserExerciseList: React.FC<Props> = ({
               <Separator className="my-4" />
             </>
           ) : null}
-          <h1 className="font-bold">{userId ? name : 'Meine Übungen'}</h1>
+          <h1 className="font-bold">{userId ? name : 'Meine Elemente'}</h1>
         </div>
         <Separator className="my-4" />
         <div className="hidden lg:block">
@@ -89,7 +89,7 @@ export const UserExerciseList: React.FC<Props> = ({
                   })}
                 >
                   <PlusIcon className="mr-2 size-4" />
-                  Übungen hinzufügen
+                  Elemente hinzufügen
                 </Link>
               </div>
             ) : null}
@@ -114,7 +114,7 @@ export const UserExerciseList: React.FC<Props> = ({
             </Sheet>
           </div>
           <Input
-            placeholder={'Suche Übungen...'}
+            placeholder={'Suche Elemente...'}
             onChange={(e) =>
               setFilterOptions((prev) => {
                 return {
@@ -134,7 +134,7 @@ export const UserExerciseList: React.FC<Props> = ({
                   })}
                 >
                   <PlusIcon className="mr-2 size-4" />
-                  Übungen hinzufügen
+                  Elemente hinzufügen
                 </Link>
               </div>
             ) : null}
@@ -194,7 +194,7 @@ export const UserExerciseList: React.FC<Props> = ({
           </div>
         ) : (
           <div className="flex h-[calc(100vh-var(--navbar-height)-100px)] items-center justify-center">
-            <div>Keine Übungen gefunden</div>
+            <div>Keine Elemente gefunden</div>
           </div>
         )}
       </div>

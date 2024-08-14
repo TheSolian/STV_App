@@ -39,7 +39,7 @@ export const Navbar: React.FC<Props> = ({}) => {
             href="/my-exercises"
             className={buttonVariants({ variant: 'link' })}
           >
-            Meine Übungen
+            Meine Elemente
           </Link>
         </div>
         <div className="flex items-center gap-8">
@@ -83,7 +83,7 @@ export const Navbar: React.FC<Props> = ({}) => {
                   href="/my-exercises"
                   className={buttonVariants({ variant: 'link' })}
                 >
-                  Meine Übungen
+                  Meine Elemente
                 </Link>
               </div>
               <div className="flex flex-col items-start">

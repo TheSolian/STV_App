@@ -76,7 +76,7 @@ export const ExerciseList: React.FC<Props> = ({ exercises, userExercises }) => {
             </Sheet>
           </div>
           <Input
-            placeholder={'Suche Übungen...'}
+            placeholder={'Suche Elemente...'}
             onChange={(e) =>
               setFilterOptions((prev) => {
                 return {

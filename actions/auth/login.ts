@@ -24,8 +24,10 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { error: 'Ungültige Logindaten!' }
   }
 
+  const isPasswordValid = await bcrypt.compare(password, existingUser.password)
+
   if (existingUser.isDefaultPassword) {
-    if (await bcrypt.compare(password, existingUser.password)) {
+    if (isPasswordValid) {
       return redirect(`/auth/change-password?id=${existingUser.id}`)
     }
   }

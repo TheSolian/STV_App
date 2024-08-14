@@ -98,7 +98,7 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
                 setIsChecked(value as boolean)
               }}
             />
-            <Label htmlFor="able">Ich kann die Übung</Label>
+            <Label htmlFor="able">Ich kann die Elemente</Label>
           </div>
           <Button
             size="icon"
@@ -117,7 +117,7 @@ export const UserExercise: React.FC<Props> = ({ exercise, userId }) => {
         <CardFooter>
           <div className="flex items-center gap-2">
             <Checkbox checked={exercise.able} className="cursor-default" />
-            <div>Kann die Übung</div>
+            <div>Kann das Element</div>
           </div>
         </CardFooter>
       )}

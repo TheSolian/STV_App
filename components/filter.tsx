@@ -27,9 +27,9 @@ type FilterOptionAble = 'all' | 'able' | 'not-able'
 type FilterOptionDifficulty =
   | 'all'
   | 'B'
-  | 'K1'
-  | 'K2'
-  | 'K3'
+  // | 'K1'
+  // | 'K2'
+  // | 'K3'
   | 'K4'
   | 'K5'
   | 'K6'
@@ -43,9 +43,9 @@ export const Filter: React.FC<Props> = ({
   const [categories, setCategories] = useState<Category[]>([])
   const [difficulties, setDifficulties] = useState<FilterOptionDifficulty[]>([
     'B',
-    'K1',
-    'K2',
-    'K3',
+    // 'K1',
+    // 'K2',
+    // 'K3',
     'K4',
     'K5',
     'K6',
@@ -72,7 +72,7 @@ export const Filter: React.FC<Props> = ({
               })
             }}
           >
-            <div className="font-bold">Kann die Übung</div>
+            <div className="font-bold">Kann das Element</div>
             <div className="flex flex-col gap-2 pl-4">
               <div className="flex items-center gap-2">
                 <RadioGroupItem value="all" id="able-all" />

@@ -32,7 +32,7 @@ export const userTableColumns: ColumnDef<User>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Anzahl Übungen
+          Anzahl Elemente
           <ArrowUpDownIcon className="ml-2 size-4" />
         </Button>
       )
@@ -44,7 +44,7 @@ export const userTableColumns: ColumnDef<User>[] = [
   },
   {
     id: 'actions',
-    header: 'Übungen anzeigen',
+    header: 'Elemente anzeigen',
     cell: ({ row }) => {
       return (
         <Tooltip>
@@ -59,7 +59,7 @@ export const userTableColumns: ColumnDef<User>[] = [
               <EyeIcon className="size-4" />
             </Link>
           </TooltipTrigger>
-          <TooltipContent>Übungen anzeigen</TooltipContent>
+          <TooltipContent>Elemente anzeigen</TooltipContent>
         </Tooltip>
       )
     },

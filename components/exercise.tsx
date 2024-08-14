@@ -70,7 +70,7 @@ export const Exercise: React.FC<Props> = ({ exercise, isInUsersList }) => {
             width={0}
             height={0}
             sizes="100vw"
-            className="h-40 w-full overflow-hidden rounded-md border object-contain"
+            className="h-[100px] w-full overflow-hidden rounded-md border object-contain"
             priority
           />
           <div className="flex flex-col gap-2">

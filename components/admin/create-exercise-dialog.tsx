@@ -138,7 +138,7 @@ export const CreateExerciseDialog: React.FC<Props> = ({ triggerLabel }) => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Übung erstellen</DialogTitle>
+          <DialogTitle>Element erstellen</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form
